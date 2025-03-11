@@ -1,0 +1,14 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  background-color: beige;
+}
+
+header li {
+  display: inline;
+}
+
+.header-logo {
+  width: 200px;
+}
