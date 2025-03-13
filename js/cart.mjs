@@ -9,6 +9,7 @@ function renderCartItems(key) {
     price.push(filmsInStorage.price);
 
     const film = document.createElement("div");
+    film.className = "cart-item";
     document.querySelector("#cart").appendChild(film);
 
     const filmPoster = document.createElement("img");
