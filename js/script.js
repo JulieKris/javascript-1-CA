@@ -31,12 +31,9 @@ function renderFilms(films) {
     filmCard.id = "film-card";
     filmCard.className = "film-card";
 
-    const imgLink = document.createElement("a");
-    imgLink.setAttribute("href", filmUrl);
-    filmCard.appendChild(imgLink);
     const poster = document.createElement("img");
     poster.setAttribute("src", film.image.url);
-    imgLink.appendChild(poster);
+    filmCard.appendChild(poster);
 
     const title = document.createElement("a");
     title.setAttribute("href", filmUrl);
@@ -51,7 +48,7 @@ function createGenreSelect(genres) {
   filmGenres.push(...new Set(unfilteredFilmGenres)); //removes duplicate genres
   const genreOptionAll = document.createElement("option");
   genreOptionAll.setAttribute("value", "All");
-  genreOptionAll.innerText = "All";
+  genreOptionAll.innerText = "Genre";
   document.querySelector("#genre-select").appendChild(genreOptionAll);
 
   genres.forEach((genre) => {

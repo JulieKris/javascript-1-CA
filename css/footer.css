@@ -1,0 +1,15 @@
+footer {
+  background-color: var(--color3);
+  width: 100%;
+}
+
+footer ul {
+  margin: 50px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+footer li {
+  list-style: none;
+}

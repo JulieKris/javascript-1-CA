@@ -1,0 +1,72 @@
+.index-main {
+  background-color: var(--color1);
+  width: 1060px;
+  margin: auto;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 5px 5px 10px var(--color1);
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.film-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.film-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 150px;
+}
+
+.film-card a {
+  position: absolute;
+  font-family: "Bebas Neue";
+  font-size: 26px;
+  width: 150px;
+  height: 220px;
+  padding: 5px;
+  background-color: rgba(19, 19, 19, 0.7);
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.film-card a:hover {
+  opacity: 1;
+  transition-duration: 0.4s;
+}
+
+.film-card img {
+  width: 150px;
+  height: 220px;
+  border-radius: 10px;
+}
+
+@media only screen and (max-width: 1250px) {
+  .index-main {
+    width: 890px;
+  }
+}
+
+@media only screen and (max-width: 1090px) {
+  .index-main {
+    width: 720px;
+  }
+}
+
+@media only screen and (max-width: 910px) {
+  .index-main {
+    width: 550px;
+  }
+}

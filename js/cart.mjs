@@ -2,6 +2,34 @@ let filmsInStorage;
 let price = [];
 
 function renderCartItems(key) {
+  if (localStorage.length !== 0) {
+    const categoryDiv = document.createElement("div");
+    categoryDiv.className = "cart-column-names";
+    document.querySelector("#cart").appendChild(categoryDiv);
+
+    const posterColumn = document.createElement("h3");
+    posterColumn.className = "column-name1";
+    categoryDiv.appendChild(posterColumn);
+    const titleColumn = document.createElement("h3");
+    titleColumn.innerText = "Title";
+    titleColumn.className = "column-name2";
+    categoryDiv.appendChild(titleColumn);
+    const priceColumn = document.createElement("h3");
+    priceColumn.innerText = "Price";
+    priceColumn.className = "column-name3";
+    categoryDiv.appendChild(priceColumn);
+
+    const dividingLine = document.createElement("hr");
+    document.querySelector("#cart").appendChild(dividingLine);
+  } else {
+    const emptyCartText = document.createElement("p");
+    emptyCartText.innerText = "Your cart is currently empty.";
+    emptyCartText.className = "empty-cart-text";
+    document.querySelector("#cart").appendChild(emptyCartText);
+    const emptyCartDividingLine = document.createElement("hr");
+    document.querySelector("#cart").appendChild(emptyCartDividingLine);
+  }
+
   for (let i = 0; i < localStorage.length; i++) {
     filmsInStorage = localStorage.getItem(localStorage.key(i));
     filmsInStorage = JSON.parse(filmsInStorage);
@@ -17,10 +45,12 @@ function renderCartItems(key) {
     film.appendChild(filmPoster);
 
     const filmTitle = document.createElement("p");
+    filmTitle.className = "cart-film-title";
     filmTitle.innerText = filmsInStorage.title;
     film.appendChild(filmTitle);
 
     const filmPrice = document.createElement("p");
+    filmPrice.className = "cart-film-price";
     filmPrice.innerText = filmsInStorage.price + " NOK";
     film.appendChild(filmPrice);
 
@@ -34,6 +64,9 @@ function renderCartItems(key) {
       localStorage.removeItem(localStorage.key(i));
       location.reload();
     }
+
+    const cartDividingLine = document.createElement("hr");
+    document.querySelector("#cart").appendChild(cartDividingLine);
   }
 }
 
@@ -49,6 +82,7 @@ function renderCartTotal() {
   const totalPriceRounded = totalPrice.toFixed(2); // rounds the total number to two decimals
 
   const cartTotal = document.createElement("div");
+  cartTotal.className = "cart-total";
   document.querySelector("#cart").appendChild(cartTotal);
   const totalText = document.createElement("p");
   totalText.innerText = "Total: ";

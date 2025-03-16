@@ -1,32 +1,5 @@
-let title;
-let poster;
-let year;
-let genre;
-let description;
-let price;
-
-async function fetchFilm() {
-  try {
-    const response = await fetch(
-      "https://v2.api.noroff.dev/square-eyes/04fd79ad-2612-4dab-b2ee-1320c4e5ccd1"
-    );
-    const data = await response.json();
-    title = data.data.title;
-    poster = data.data.image.url;
-    year = data.data.released;
-    genre = data.data.genre;
-    description = data.data.description;
-    price = data.data.price;
-
-    renderFilmInfo();
-    buttonText();
-    document.querySelector("#add-to-cart").addEventListener("click", addToCart);
-  } catch (error) {
-    console.error("Error fetching films:", error);
-  }
-}
-
 function renderFilmInfo() {
+  console.log("import works");
   const filmPoster = document.createElement("img");
   filmPoster.setAttribute("src", poster);
   document.querySelector("#film-poster").appendChild(filmPoster);
@@ -71,33 +44,4 @@ function renderFilmInfo() {
   priceDiv.appendChild(addToCartButton);
 }
 
-function buttonText() {
-  if (localStorage.getItem("mandalorian") === null) {
-    document.querySelector("#add-to-cart").innerText = "Add to cart";
-  }
-  if (localStorage.getItem("mandalorian") !== null) {
-    document.querySelector("#add-to-cart").innerText = "Remove from cart";
-  }
-}
-
-function addToCart() {
-  let mandalorian = {
-    title: title,
-    poster: poster,
-    price: price,
-  };
-
-  if (document.querySelector("#add-to-cart").innerText === "Add to cart") {
-    localStorage.setItem("mandalorian", JSON.stringify(mandalorian));
-    document.querySelector("#add-to-cart").innerText = "Remove from cart";
-    document.querySelector("#item-count").innerText = localStorage.length;
-  } else {
-    localStorage.removeItem("mandalorian");
-    document.querySelector("#add-to-cart").innerText = "Add to cart";
-    document.querySelector("#item-count").innerText = localStorage.length;
-  }
-}
-
-fetchFilm();
-
-document.querySelector("#item-count").innerText = localStorage.length;
+export { renderFilmInfo };
