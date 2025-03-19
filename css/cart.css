@@ -2,12 +2,12 @@
   margin: auto;
   display: flex;
   flex-direction: row;
-  width: 1020px;
+  width: 920px;
   gap: 20px;
+  align-items: center;
 }
 
 .cart {
-  margin: auto;
   background-color: var(--color1);
   width: 500px;
   padding: 20px;
@@ -17,6 +17,7 @@
   flex-direction: column;
   gap: 20px;
   margin-bottom: 0px;
+  height: min-content;
 }
 
 .cart-column-names {
@@ -58,18 +59,57 @@
 }
 
 .empty-cart-text {
-  padding-top: 70px;
-  padding-bottom: 70px;
+  padding-top: 83px;
+  padding-bottom: 83px;
   text-align: center;
 }
 
 .forms {
-  width: 500px;
   background-color: var(--color1);
   padding: 20px;
   border-radius: 20px;
-  margin: auto;
   box-shadow: 5px 5px 10px var(--color1);
+  width: 400px;
+  height: min-content;
+  opacity: 1;
+}
+
+input {
+  margin-bottom: 20px;
+}
+
+.cart-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.cart-form-bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cart-form-bottom div {
+  width: 175px;
+}
+
+.cart-form-submit {
+  color: var(--color2);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: min-content;
+  height: 45px;
+}
+
+.cart-form-submit:hover {
+  background-color: var(--color3);
+  transition: 0.5s;
 }
 
 @media only screen and (max-width: 1220px) {

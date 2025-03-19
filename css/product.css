@@ -1,19 +1,21 @@
 .film-poster img {
   border-radius: 20px;
   box-shadow: 5px 5px 10px var(--color1);
-  width: 350px;
-  align-self: end;
+  max-width: 350px;
+  width: 100%;
+  margin: auto;
 }
 
 .film-poster img:hover {
-  animation-name: hover;
-  animation-duration: 3s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
+  box-shadow: 20px 20px 40px var(--color1);
+  transform: translateY(-10px) scale(1.03);
+  filter: brightness(1.3) contrast(1.1);
+  transition: 1s;
 }
 
 .film-poster {
-  display: flex;
+  max-width: 350px;
+  margin: 0;
 }
 
 .film-info {
@@ -24,13 +26,14 @@
 }
 
 .film-information {
+  position: relative;
   align-self: center;
   background-color: var(--color1);
   border-radius: 20px;
   padding: 20px;
   height: min-content;
   box-shadow: 5px 5px 10px var(--color1);
-  width: 400px;
+  max-width: 400px;
 }
 
 .film-description {
@@ -56,26 +59,47 @@
   text-align: center;
 }
 
+.product-page-star {
+  position: absolute;
+  bottom: -55px;
+  right: -10px;
+  background-image: url(../img/star1.png);
+  background-size: cover;
+  width: 100px;
+  height: 100px;
+}
+
+.product-error {
+  width: 400px;
+}
+
 @keyframes hover {
   0% {
-    transform: translateY(0px);
+    transform: translateY(0px) scale(1);
     filter: brightness(1) contrast(1);
   }
   50% {
-    transform: translateY(-10px);
-    filter: brightness(1.3) contrast(1.2);
-  }
-  100% {
-    transform: translateY(0px);
-    filter: brightness(1) contrast(1);
   }
 }
 
 @media only screen and (max-width: 1000px) {
+  .film-poster {
+    margin: auto;
+  }
+
   .film-info {
-    display: flex;
     flex-direction: column;
-    gap: 20px;
-    justify-content: center;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .film-information h1 {
+    font-size: 40px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .film-information h1 {
+    font-size: 30px;
   }
 }

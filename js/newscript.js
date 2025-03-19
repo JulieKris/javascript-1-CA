@@ -2,9 +2,11 @@ let allFilms = [];
 let unfilteredFilmGenres = [];
 let filmGenres = [];
 
+const apiUrl = "https://v2.api.noroff.dev/square-eyes";
+
 async function fetchFilms() {
   try {
-    const response = await fetch("https://v2.api.noroff.dev/square-eyes");
+    const response = await fetch(apiUrl);
     const data = await response.json();
 
     allFilms = data.data;
@@ -20,34 +22,7 @@ async function fetchFilms() {
   }
 }
 
-function renderFilms(films) {
-  films.forEach((film) => {
-    unfilteredFilmGenres.push(film.genre);
-
-    let filmUrl = film.title;
-    filmUrl = filmUrl.split(":").join("");
-    filmUrl = filmUrl.split("&").join("and");
-    filmUrl = filmUrl.split(" ").join("-");
-    filmUrl = "/" + filmUrl.toLowerCase() + ".html";
-
-    const filmCard = document.createElement("div");
-    filmCard.id = "film-card";
-    filmCard.className = "film-card";
-
-    const poster = document.createElement("img");
-    poster.setAttribute("src", film.image.url);
-    filmCard.appendChild(poster);
-
-    const title = document.createElement("a");
-    title.setAttribute("href", filmUrl);
-    title.textContent = film.title;
-    filmCard.appendChild(title);
-
-    document.querySelector("#film-container").appendChild(filmCard);
-  });
-}
-
-function createGenreSelect(genres) {
+function genreSelect(genres) {
   filmGenres.push(...new Set(unfilteredFilmGenres)); //removes duplicate genres
   const genreOptionAll = document.createElement("option");
   genreOptionAll.setAttribute("value", "All");
@@ -88,5 +63,3 @@ function filterFilmsByGenre() {
 }
 
 fetchFilms();
-
-document.querySelector("#item-count").innerText = localStorage.length;

@@ -12,20 +12,23 @@
 }
 
 body {
-  display: grid;
-  grid-template-rows: auto 1fr;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   height: 100vh;
   font-family: "Hind", sans-serif;
   font-weight: 100;
   font-size: 16px;
   color: var(--color2);
+  background-color: var(--color3);
 }
 
 main {
-  padding-top: 50px;
+  padding-top: 150px;
   padding-bottom: 50px;
   background-image: linear-gradient(#2f2f2f, #415083);
-  background-size: 100vh;
+  background-size: 100%;
+  height: max-content;
 }
 
 a {
@@ -98,7 +101,7 @@ select {
   border-style: none;
   font-size: 16px;
   font-weight: 600;
-  width: 150px;
+  width: 145px;
   height: 40px;
   padding: 10px;
   border-radius: 8px;

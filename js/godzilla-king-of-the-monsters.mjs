@@ -23,6 +23,10 @@ async function fetchFilm() {
     document.querySelector("#add-to-cart").addEventListener("click", addToCart);
   } catch (error) {
     console.error("Error fetching films:", error);
+    const errorMessage = document.createElement("p");
+    errorMessage.className = "product-error";
+    errorMessage.innerText = "Something went wrong.";
+    document.querySelector("#film-information").appendChild(errorMessage);
   }
 }
 

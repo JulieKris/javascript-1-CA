@@ -13,3 +13,10 @@ footer ul {
 footer li {
   list-style: none;
 }
+
+@media only screen and (max-width: 750px) {
+  footer ul {
+    display: block;
+    margin-left: 20px;
+  }
+}

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SquareEyes</title>
+    <title>Cart | SquareEyes</title>
     <link rel="stylesheet" href="css/styles.css" />
     <link
       rel="icon"
@@ -42,14 +42,37 @@
         </div>
         <div class="forms">
           <h2>checkout</h2>
-          <form>
-            <input type="text" />
-            <input type="text" />
-            <div>
-              <input type="text" />
-              <input type="text" />
+          <form class="cart-form">
+            <label for="name">Card holders name</label>
+            <input type="text" class="name" id="name" name="name" />
+            <label for="card-number">Card number</label>
+            <input
+              type="text"
+              class="card-number"
+              id="card-number"
+              name="card-number"
+            />
+            <div class="cart-form-bottom">
+              <div>
+                <label for="expiration-date">Expiration date</label>
+                <input
+                  type="text"
+                  class="expiration-date"
+                  id="expiration-date"
+                  name="expiration-date"
+                />
+              </div>
+              <div>
+                <label for="cvv-cvc">CVV/CVC</label>
+                <input
+                  type="text"
+                  class="cvv-cvc"
+                  id="cvv-cvc"
+                  name="cvv-cvc"
+                />
+              </div>
             </div>
-            <input type="submit" />
+            <input type="submit" class="cart-form-submit" value="Checkout" />
           </form>
         </div>
       </div>
