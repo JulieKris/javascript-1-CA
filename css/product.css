@@ -33,6 +33,7 @@
   padding: 20px;
   height: min-content;
   box-shadow: 5px 5px 10px var(--color1);
+  min-width: 400px;
   max-width: 400px;
 }
 
@@ -91,6 +92,10 @@
     flex-direction: column;
     margin-left: 20px;
     margin-right: 20px;
+  }
+
+  .film-information {
+    min-width: 300px;
   }
 
   .film-information h1 {

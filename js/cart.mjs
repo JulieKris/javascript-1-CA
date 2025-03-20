@@ -1,7 +1,10 @@
+import loading from "./loading.mjs";
+
 let filmsInStorage;
 let price = [];
 
 function renderCartItems(key) {
+  loading.show();
   try {
     if (localStorage.length !== 0) {
       const categoryDiv = document.createElement("div");
@@ -71,6 +74,8 @@ function renderCartItems(key) {
     }
   } catch (error) {
     console.log("error");
+  } finally {
+    loading.hide();
   }
 }
 

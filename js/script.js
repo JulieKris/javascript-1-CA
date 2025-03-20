@@ -1,8 +1,11 @@
+import loading from "./loading.mjs";
+
 let allFilms = [];
 let unfilteredFilmGenres = [];
 let filmGenres = [];
 
 async function fetchFilms() {
+  loading.show();
   try {
     const response = await fetch("https://v2.api.noroff.dev/square-eyes");
     const data = await response.json();
@@ -17,18 +20,14 @@ async function fetchFilms() {
     const errorMessage = document.createElement("p");
     errorMessage.innerText = "Something went wrong.";
     document.querySelector("#film-container").appendChild(errorMessage);
+  } finally {
+    loading.hide();
   }
 }
 
 function renderFilms(films) {
   films.forEach((film) => {
     unfilteredFilmGenres.push(film.genre);
-
-    let filmUrl = film.title;
-    filmUrl = filmUrl.split(":").join("");
-    filmUrl = filmUrl.split("&").join("and");
-    filmUrl = filmUrl.split(" ").join("-");
-    filmUrl = "/" + filmUrl.toLowerCase() + ".html";
 
     const filmCard = document.createElement("div");
     filmCard.id = "film-card";
@@ -38,12 +37,17 @@ function renderFilms(films) {
     poster.setAttribute("src", film.image.url);
     filmCard.appendChild(poster);
 
-    const title = document.createElement("a");
-    title.setAttribute("href", filmUrl);
+    const anchor = document.createElement("a");
+    anchor.className = "product-link";
+
+    anchor.href = `product.html?id=${film.id}`;
+
+    const title = document.createElement("p");
     title.textContent = film.title;
     filmCard.appendChild(title);
 
-    document.querySelector("#film-container").appendChild(filmCard);
+    anchor.appendChild(filmCard);
+    document.querySelector("#film-container").appendChild(anchor);
   });
 }
 
@@ -69,7 +73,7 @@ function filterFilmsByGenre() {
   genreSelect.addEventListener("change", () => {
     const selectedOption = genreSelect.options[genreSelect.selectedIndex];
 
-    const list = document.querySelectorAll(".film-card");
+    const list = document.querySelectorAll(".product-link");
     for (const element of list) {
       element.remove();
     }
