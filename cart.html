@@ -43,9 +43,11 @@
         </div>
         <div class="forms">
           <h2>checkout</h2>
-          <form class="cart-form">
+          <form class="chekout-form" id="checkout-form">
+            <p id="name-error" class="form-error"></p>
             <label for="name">Card holders name</label>
             <input type="text" class="name" id="name" name="name" />
+            <p id="card-number-error" class="form-error"></p>
             <label for="card-number">Card number</label>
             <input
               type="text"
@@ -55,6 +57,7 @@
             />
             <div class="cart-form-bottom">
               <div>
+                <p id="expiration-date-error" class="form-error"></p>
                 <label for="expiration-date">Expiration date</label>
                 <input
                   type="text"
@@ -64,6 +67,7 @@
                 />
               </div>
               <div>
+                <p id="cvv-cvc-error" class="form-error"></p>
                 <label for="cvv-cvc">CVV/CVC</label>
                 <input
                   type="text"
@@ -73,7 +77,7 @@
                 />
               </div>
             </div>
-            <input type="submit" class="cart-form-submit" value="Checkout" />
+            <input type="submit" class="checkout-submit" value="Checkout" />
           </form>
         </div>
       </div>

@@ -18,7 +18,7 @@ async function fetchFilms() {
   } catch (error) {
     console.error("Error fetching films:", error);
     const errorMessage = document.createElement("p");
-    errorMessage.innerText = "Something went wrong.";
+    errorMessage.innerText = "Something went wrong, couldn't get films.";
     document.querySelector("#film-container").appendChild(errorMessage);
   } finally {
     loading.hide();
@@ -53,12 +53,14 @@ function renderFilms(films) {
 
 function createGenreSelect(genres) {
   filmGenres.push(...new Set(unfilteredFilmGenres)); //removes duplicate genres
+  //create select option for all genres
   const genreOptionAll = document.createElement("option");
   genreOptionAll.setAttribute("value", "All");
   genreOptionAll.innerText = "Genre";
   document.querySelector("#genre-select").appendChild(genreOptionAll);
 
   genres.forEach((genre) => {
+    //create select option for each genre
     const genreOption = document.createElement("option");
     genreOption.setAttribute("value", genre);
     genreOption.id = "genre-option";
@@ -75,6 +77,7 @@ function filterFilmsByGenre() {
 
     const list = document.querySelectorAll(".product-link");
     for (const element of list) {
+      //remove previous renderedfilms when new option is selected
       element.remove();
     }
 

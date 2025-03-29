@@ -96,7 +96,7 @@ input {
 }
 
 select {
-  color: #5f5f5e;
+  color: var(--color2);
   background-color: #31333b;
   border-style: none;
   font-size: 16px;

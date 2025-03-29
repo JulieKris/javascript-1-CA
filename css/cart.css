@@ -78,23 +78,23 @@ input {
   margin-bottom: 20px;
 }
 
-.cart-form {
+.checkout-form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin-top: 10px;
 }
 
-.cart-form-bottom {
+.checkout-form-bottom {
   display: flex;
   justify-content: space-between;
 }
 
-.cart-form-bottom div {
+.checkout-form-bottom div {
   width: 175px;
 }
 
-.cart-form-submit {
+.checkout-form-submit {
   color: var(--color2);
   font-size: 14px;
   font-weight: 600;
@@ -107,9 +107,14 @@ input {
   height: 45px;
 }
 
-.cart-form-submit:hover {
+.checkout-form-submit:hover {
   background-color: var(--color3);
   transition: 0.5s;
+}
+
+.form-error {
+  font-size: 10px;
+  color: var(--color4);
 }
 
 @media only screen and (max-width: 1220px) {

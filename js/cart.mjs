@@ -7,6 +7,7 @@ function renderCartItems(key) {
   loading.show();
   try {
     if (localStorage.length !== 0) {
+      // if there's items in storage
       const categoryDiv = document.createElement("div");
       categoryDiv.className = "cart-column-names";
       document.querySelector("#cart").appendChild(categoryDiv);
@@ -35,6 +36,7 @@ function renderCartItems(key) {
     }
 
     for (let i = 0; i < localStorage.length; i++) {
+      // for every item in storage
       filmsInStorage = localStorage.getItem(localStorage.key(i));
       filmsInStorage = JSON.parse(filmsInStorage);
 
@@ -65,6 +67,7 @@ function renderCartItems(key) {
       removeButton.addEventListener("click", removeFilm);
 
       function removeFilm() {
+        // remove item from storage
         localStorage.removeItem(localStorage.key(i));
         location.reload();
       }
@@ -73,7 +76,12 @@ function renderCartItems(key) {
       document.querySelector("#cart").appendChild(cartDividingLine);
     }
   } catch (error) {
-    console.log("error");
+    const cartError = document.createElement("p");
+    cartError.innerText = "Something went wrong, couldn't get cart items.";
+    cartError.className = "empty-cart-text";
+    document.querySelector("#cart").appendChild(cartError);
+    const cartDividingLine = document.createElement("hr");
+    document.querySelector("#cart").appendChild(cartDividingLine);
   } finally {
     loading.hide();
   }
@@ -102,5 +110,61 @@ function renderCartTotal() {
 }
 
 renderCartTotal();
+
+const form = document.getElementById("checkout-form");
+
+form.addEventListener("submit", (e) => {
+  let name = document.getElementById("name");
+  let cardNumber = document.getElementById("card-number");
+  let cvvCvc = document.getElementById("cvv-cvc");
+  let expirationDate = document.getElementById("expiration-date");
+
+  if (name.value === "") {
+    document.querySelector("#name-error").innerText = "Name is required";
+    e.preventDefault();
+  } else {
+    document.querySelector("#name-error").innerText = "";
+    sessionStorage.setItem("name", name.value);
+  }
+
+  if (cardNumber.value === "") {
+    document.querySelector("#card-number-error").innerText =
+      "Card number is required";
+    e.preventDefault();
+  } else if (cardNumber.value.length < 11) {
+    document.querySelector("#card-number-error").innerText =
+      "Card number must be 11 digits";
+    e.preventDefault();
+  } else if (cardNumber.value.length > 11) {
+    document.querySelector("#card-number-error").innerText =
+      "Card number must be 11 digits";
+    e.preventDefault();
+  } else {
+    document.querySelector("#card-number-error").innerText = "";
+  }
+
+  if (expirationDate.value === "") {
+    document.querySelector("#expiration-date-error").innerText =
+      "Expiration date is required";
+    e.preventDefault();
+  } else {
+    document.querySelector("#expiration-date-error").innerText = "";
+  }
+
+  if (cvvCvc.value === "") {
+    document.querySelector("#cvv-cvc-error").innerText = "CVV/CVC is required";
+    e.preventDefault();
+  } else if (cvvCvc.value.length < 3) {
+    document.querySelector("#cvv-cvc-error").innerText =
+      "CVV/CVC must be 3 digits";
+    e.preventDefault();
+  } else if (cvvCvc.value.length > 3) {
+    document.querySelector("#cvv-cvc-error").innerText =
+      "CVV/CVC must be 3 digits";
+    e.preventDefault();
+  } else {
+    document.querySelector("#cvv-cvc-error").innerText = "";
+  }
+});
 
 document.querySelector("#item-count").innerText = localStorage.length;

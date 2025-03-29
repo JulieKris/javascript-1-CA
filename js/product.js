@@ -32,7 +32,7 @@ async function fetchFilm() {
     console.error("Error fetching films:", error);
     const errorMessage = document.createElement("p");
     errorMessage.className = "product-error";
-    errorMessage.innerText = "Something went wrong.";
+    errorMessage.innerText = "Something went wrong, couldn't get film.";
     document.querySelector("#film-information").appendChild(errorMessage);
   } finally {
     loading.hide();
@@ -84,6 +84,7 @@ function renderFilmInfo() {
   priceDiv.appendChild(addToCartButton);
 }
 
+//changes the text on add to cart button when clicked to remove
 function buttonText() {
   if (localStorage.getItem(id) === null) {
     document.querySelector("#add-to-cart").innerText = "Add to cart";
@@ -93,6 +94,7 @@ function buttonText() {
   }
 }
 
+//stores film in storage or removes it if it is in storage
 function addToCart() {
   let store = {
     title: title,
