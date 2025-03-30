@@ -119,51 +119,64 @@ form.addEventListener("submit", (e) => {
   let cvvCvc = document.getElementById("cvv-cvc");
   let expirationDate = document.getElementById("expiration-date");
 
-  if (name.value === "") {
-    document.querySelector("#name-error").innerText = "Name is required";
-    e.preventDefault();
+  if (
+    name.value !== "" &&
+    cardNumber.value !== "" &&
+    expirationDate.value !== "" &&
+    cvvCvc.value !== "" &&
+    cardNumber.value.length === 11 &&
+    cvvCvc.value.length === 3 &&
+    !isNaN(cardNumber.value) &&
+    !isNaN(cvvCvc.value)
+  ) {
   } else {
-    document.querySelector("#name-error").innerText = "";
-    sessionStorage.setItem("name", name.value);
-  }
+    if (name.value === "") {
+      document.querySelector("#name-error").innerText = "Name is required";
+      e.preventDefault();
+    } else {
+      document.querySelector("#name-error").innerText = "";
+      sessionStorage.setItem("name", name.value);
+    }
 
-  if (cardNumber.value === "") {
-    document.querySelector("#card-number-error").innerText =
-      "Card number is required";
-    e.preventDefault();
-  } else if (cardNumber.value.length < 11) {
-    document.querySelector("#card-number-error").innerText =
-      "Card number must be 11 digits";
-    e.preventDefault();
-  } else if (cardNumber.value.length > 11) {
-    document.querySelector("#card-number-error").innerText =
-      "Card number must be 11 digits";
-    e.preventDefault();
-  } else {
-    document.querySelector("#card-number-error").innerText = "";
-  }
+    if (cardNumber.value === "") {
+      document.querySelector("#card-number-error").innerText =
+        "Card number is required";
+      e.preventDefault();
+    } else if (cardNumber.value.length !== 11) {
+      document.querySelector("#card-number-error").innerText =
+        "Card number must be 11 digits";
+      e.preventDefault();
+    } else if (isNaN(cardNumber.value)) {
+      document.querySelector("#card-number-error").innerText =
+        "Card number must be a number";
+      e.preventDefault();
+    } else {
+      document.querySelector("#card-number-error").innerText = "";
+    }
 
-  if (expirationDate.value === "") {
-    document.querySelector("#expiration-date-error").innerText =
-      "Expiration date is required";
-    e.preventDefault();
-  } else {
-    document.querySelector("#expiration-date-error").innerText = "";
-  }
+    if (expirationDate.value === "") {
+      document.querySelector("#expiration-date-error").innerText =
+        "Expiration date is required";
+      e.preventDefault();
+    } else {
+      document.querySelector("#expiration-date-error").innerText = "";
+    }
 
-  if (cvvCvc.value === "") {
-    document.querySelector("#cvv-cvc-error").innerText = "CVV/CVC is required";
-    e.preventDefault();
-  } else if (cvvCvc.value.length < 3) {
-    document.querySelector("#cvv-cvc-error").innerText =
-      "CVV/CVC must be 3 digits";
-    e.preventDefault();
-  } else if (cvvCvc.value.length > 3) {
-    document.querySelector("#cvv-cvc-error").innerText =
-      "CVV/CVC must be 3 digits";
-    e.preventDefault();
-  } else {
-    document.querySelector("#cvv-cvc-error").innerText = "";
+    if (cvvCvc.value === "") {
+      document.querySelector("#cvv-cvc-error").innerText =
+        "CVV/CVC is required";
+      e.preventDefault();
+    } else if (cvvCvc.value.length !== 3) {
+      document.querySelector("#cvv-cvc-error").innerText =
+        "CVV/CVC must be 3 digits";
+      e.preventDefault();
+    } else if (isNaN(cvvCvc.value)) {
+      document.querySelector("#cvv-cvc-error").innerText =
+        "CVV/CVC must be a number";
+      e.preventDefault();
+    } else {
+      document.querySelector("#cvv-cvc-error").innerText = "";
+    }
   }
 });
 
