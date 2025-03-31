@@ -1,0 +1,27 @@
+.checkout-success {
+  margin: auto;
+  text-align: center;
+  background-color: var(--color1);
+  border-radius: 20px;
+  padding: 20px;
+  width: min-content;
+  min-width: 515px;
+  max-width: 1010px;
+  box-shadow: 5px 5px 10px var(--color1);
+}
+
+.checkout-success p {
+  margin-bottom: 20px;
+}
+
+.purchased-films {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.purchased-films img {
+  width: 145px;
+  height: 215px;
+  border-radius: 10px;
+}

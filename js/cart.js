@@ -46,9 +46,13 @@ function renderCartItems(key) {
       film.className = "cart-item";
       document.querySelector("#cart").appendChild(film);
 
+      const anchor = document.createElement("a");
+      anchor.href = `product.html?id=${filmsInStorage.id}`;
+      film.appendChild(anchor);
+
       const filmPoster = document.createElement("img");
       filmPoster.setAttribute("src", filmsInStorage.poster);
-      film.appendChild(filmPoster);
+      anchor.appendChild(filmPoster);
 
       const filmTitle = document.createElement("p");
       filmTitle.className = "cart-film-title";
@@ -118,38 +122,36 @@ form.addEventListener("submit", (e) => {
   let cardNumber = document.getElementById("card-number");
   let cvvCvc = document.getElementById("cvv-cvc");
   let expirationDate = document.getElementById("expiration-date");
+  e.preventDefault();
 
   if (
     name.value !== "" &&
     cardNumber.value !== "" &&
     expirationDate.value !== "" &&
     cvvCvc.value !== "" &&
-    cardNumber.value.length === 11 &&
+    cardNumber.value.length === 16 &&
     cvvCvc.value.length === 3 &&
     !isNaN(cardNumber.value) &&
     !isNaN(cvvCvc.value)
   ) {
+    window.location.href = "checkout-success.html";
+    sessionStorage.setItem("name", name.value);
   } else {
     if (name.value === "") {
       document.querySelector("#name-error").innerText = "Name is required";
-      e.preventDefault();
     } else {
       document.querySelector("#name-error").innerText = "";
-      sessionStorage.setItem("name", name.value);
     }
 
     if (cardNumber.value === "") {
       document.querySelector("#card-number-error").innerText =
         "Card number is required";
-      e.preventDefault();
-    } else if (cardNumber.value.length !== 11) {
+    } else if (cardNumber.value.length !== 16) {
       document.querySelector("#card-number-error").innerText =
-        "Card number must be 11 digits";
-      e.preventDefault();
+        "Card number must be 16 digits";
     } else if (isNaN(cardNumber.value)) {
       document.querySelector("#card-number-error").innerText =
         "Card number must be a number";
-      e.preventDefault();
     } else {
       document.querySelector("#card-number-error").innerText = "";
     }
@@ -157,7 +159,6 @@ form.addEventListener("submit", (e) => {
     if (expirationDate.value === "") {
       document.querySelector("#expiration-date-error").innerText =
         "Expiration date is required";
-      e.preventDefault();
     } else {
       document.querySelector("#expiration-date-error").innerText = "";
     }
@@ -165,15 +166,12 @@ form.addEventListener("submit", (e) => {
     if (cvvCvc.value === "") {
       document.querySelector("#cvv-cvc-error").innerText =
         "CVV/CVC is required";
-      e.preventDefault();
     } else if (cvvCvc.value.length !== 3) {
       document.querySelector("#cvv-cvc-error").innerText =
         "CVV/CVC must be 3 digits";
-      e.preventDefault();
     } else if (isNaN(cvvCvc.value)) {
       document.querySelector("#cvv-cvc-error").innerText =
         "CVV/CVC must be a number";
-      e.preventDefault();
     } else {
       document.querySelector("#cvv-cvc-error").innerText = "";
     }

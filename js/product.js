@@ -40,6 +40,8 @@ async function fetchFilm() {
 }
 
 function renderFilmInfo() {
+  document.title = title + " | Square Eyes";
+
   const filmPoster = document.createElement("img");
   filmPoster.setAttribute("src", poster);
   document.querySelector("#film-poster").appendChild(filmPoster);
@@ -100,6 +102,7 @@ function addToCart() {
     title: title,
     poster: poster,
     price: price,
+    id: id,
   };
 
   if (document.querySelector("#add-to-cart").innerText === "Add to cart") {

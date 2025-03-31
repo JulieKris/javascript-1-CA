@@ -46,7 +46,13 @@
           <form class="chekout-form" id="checkout-form">
             <p id="name-error" class="form-error"></p>
             <label for="name">Card holders name</label>
-            <input type="text" class="name" id="name" name="name" />
+            <input
+              type="text"
+              class="name"
+              id="name"
+              name="name"
+              placeholder="Name here..."
+            />
             <p id="card-number-error" class="form-error"></p>
             <label for="card-number">Card number</label>
             <input
@@ -54,6 +60,7 @@
               class="card-number"
               id="card-number"
               name="card-number"
+              placeholder="16 digits"
             />
             <div class="cart-form-bottom">
               <div>
@@ -64,6 +71,7 @@
                   class="expiration-date"
                   id="expiration-date"
                   name="expiration-date"
+                  placeholder="MM/YY"
                 />
               </div>
               <div>
@@ -74,10 +82,11 @@
                   class="cvv-cvc"
                   id="cvv-cvc"
                   name="cvv-cvc"
+                  placeholder="3 digits"
                 />
               </div>
             </div>
-            <input type="submit" class="checkout-submit" value="Checkout" />
+            <button>Checkout</button>
           </form>
         </div>
       </div>
@@ -90,6 +99,6 @@
         <li><a href="">Terms and Privacy</a></li>
       </ul>
     </footer>
-    <script type="module" src="js/cart.mjs"></script>
+    <script type="module" src="js/cart.js"></script>
   </body>
 </html>
