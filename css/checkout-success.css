@@ -1,10 +1,11 @@
 .checkout-success {
+  position: relative;
   margin: auto;
   text-align: center;
   background-color: var(--color1);
   border-radius: 20px;
   padding: 20px;
-  width: min-content;
+  width: fit-content;
   min-width: 515px;
   max-width: 1010px;
   box-shadow: 5px 5px 10px var(--color1);
@@ -16,6 +17,7 @@
 
 .purchased-films {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
 }
@@ -24,4 +26,118 @@
   width: 145px;
   height: 215px;
   border-radius: 10px;
+}
+
+.purchased-films img:hover {
+  filter: brightness(0.4);
+  transition-duration: 0.5s;
+}
+
+.checkout-success-stars {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.checkout-success-star1 {
+  position: absolute;
+  background-image: url(../img/star1.png);
+  background-size: cover;
+  width: 30px;
+  height: 30px;
+  filter: drop-shadow(5px 5px 10px var(--color1));
+  opacity: 0;
+  animation-name: star1;
+  animation-duration: 1.4s;
+}
+
+.checkout-success-star2 {
+  position: absolute;
+  background-image: url(../img/star2.png);
+  background-size: cover;
+  width: 25px;
+  height: 25px;
+  filter: drop-shadow(5px 5px 10px var(--color1));
+  opacity: 0;
+  animation-name: star2;
+  animation-duration: 1.5s;
+}
+
+.checkout-success-star3 {
+  position: absolute;
+  background-image: url(../img/star3.png);
+  background-size: cover;
+  width: 20px;
+  height: 20px;
+  filter: drop-shadow(5px 5px 10px var(--color1));
+  opacity: 0;
+  animation-name: star3;
+  animation-duration: 1.3s;
+}
+
+@keyframes star1 {
+  0% {
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+    opacity: 0;
+  }
+  45% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-60px) translateX(300px) rotate(70deg);
+  }
+}
+
+@keyframes star2 {
+  0% {
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+    opacity: 0;
+  }
+  45% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(200px) translateX(-280px) rotate(70deg);
+  }
+}
+
+@keyframes star3 {
+  0% {
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+    opacity: 0;
+  }
+  45% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-150px) translateX(-250px) rotate(70deg);
+  }
+}
+
+@media only screen and (max-width: 1250px) {
+  .checkout-success {
+    max-width: 845px;
+  }
+}
+
+@media only screen and (max-width: 1090px) {
+  .checkout-success {
+    max-width: 680px;
+  }
+}
+
+@media only screen and (max-width: 910px) {
+  .checkout-success {
+    max-width: 515px;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .checkout-success {
+    max-width: 350px;
+    min-width: 350px;
+  }
 }

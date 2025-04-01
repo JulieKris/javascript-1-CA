@@ -62,16 +62,29 @@
 
 .product-page-star {
   position: absolute;
-  bottom: -55px;
-  right: -10px;
+  bottom: -40px;
+  right: 10px;
   background-image: url(../img/star1.png);
   background-size: cover;
-  width: 100px;
-  height: 100px;
+  width: 90px;
+  height: 90px;
+  filter: drop-shadow(10px 10px 20px var(--color1));
 }
 
 .product-error {
   width: 400px;
+}
+
+.back-button {
+  position: absolute;
+  background-color: var(--color1);
+  box-shadow: 5px 5px 10px var(--color1);
+  bottom: -75px;
+  left: 0px;
+}
+
+.back-button:hover {
+  background-color: #31333b;
 }
 
 @keyframes hover {

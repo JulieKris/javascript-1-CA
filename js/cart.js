@@ -3,6 +3,21 @@ import loading from "./loading.mjs";
 let filmsInStorage;
 let price = [];
 
+//deactivate checkout if cart is empty
+function deactivateCheckout() {
+  if (localStorage.length === 0) {
+    document.querySelector("#name").disabled = true;
+    document.querySelector("#card-number").disabled = true;
+    document.querySelector("#expiration-date").disabled = true;
+    document.querySelector("#cvv-cvc").disabled = true;
+    document.querySelector("#checkout-button").disabled = true;
+
+    document.querySelector("#forms").style.opacity = "0.6";
+  }
+}
+
+deactivateCheckout();
+
 function renderCartItems(key) {
   loading.show();
   try {
@@ -35,8 +50,8 @@ function renderCartItems(key) {
       document.querySelector("#cart").appendChild(emptyCartDividingLine);
     }
 
+    // for every item in storage
     for (let i = 0; i < localStorage.length; i++) {
-      // for every item in storage
       filmsInStorage = localStorage.getItem(localStorage.key(i));
       filmsInStorage = JSON.parse(filmsInStorage);
 
@@ -70,8 +85,8 @@ function renderCartItems(key) {
 
       removeButton.addEventListener("click", removeFilm);
 
+      // remove item from storage
       function removeFilm() {
-        // remove item from storage
         localStorage.removeItem(localStorage.key(i));
         location.reload();
       }
@@ -124,6 +139,7 @@ form.addEventListener("submit", (e) => {
   let expirationDate = document.getElementById("expiration-date");
   e.preventDefault();
 
+  //if every form input is valid
   if (
     name.value !== "" &&
     cardNumber.value !== "" &&
@@ -136,6 +152,7 @@ form.addEventListener("submit", (e) => {
   ) {
     window.location.href = "checkout-success.html";
     sessionStorage.setItem("name", name.value);
+    //check individual form input
   } else {
     if (name.value === "") {
       document.querySelector("#name-error").innerText = "Name is required";
