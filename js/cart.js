@@ -2,10 +2,11 @@ import loading from "./loading.mjs";
 
 let filmsInStorage;
 let price = [];
+let cartItems = JSON.parse(localStorage.getItem("cart"));
 
 //deactivate checkout if cart is empty
 function deactivateCheckout() {
-  if (localStorage.length === 0) {
+  if (JSON.parse(localStorage.getItem("cart")).length === 0) {
     document.querySelector("#name").disabled = true;
     document.querySelector("#card-number").disabled = true;
     document.querySelector("#expiration-date").disabled = true;
@@ -18,10 +19,10 @@ function deactivateCheckout() {
 
 deactivateCheckout();
 
-function renderCartItems(key) {
+function renderCartItems() {
   loading.show();
   try {
-    if (localStorage.length !== 0) {
+    if (JSON.parse(localStorage.getItem("cart")).length !== 0) {
       // if there's items in storage
       const categoryDiv = document.createElement("div");
       categoryDiv.className = "cart-column-names";
@@ -50,50 +51,59 @@ function renderCartItems(key) {
       document.querySelector("#cart").appendChild(emptyCartDividingLine);
     }
 
+    //fix cart display
     // for every item in storage
-    for (let i = 0; i < localStorage.length; i++) {
-      filmsInStorage = localStorage.getItem(localStorage.key(i));
-      filmsInStorage = JSON.parse(filmsInStorage);
+    cartItems.forEach((item) => {
+      filmsInStorage = JSON.parse(localStorage.getItem("cart"));
 
-      price.push(filmsInStorage.price);
+      price.push(item.price);
 
       const film = document.createElement("div");
       film.className = "cart-item";
       document.querySelector("#cart").appendChild(film);
 
       const anchor = document.createElement("a");
-      anchor.href = `product.html?id=${filmsInStorage.id}`;
+      anchor.href = `product.html?id=${item.id}`;
       film.appendChild(anchor);
 
       const filmPoster = document.createElement("img");
-      filmPoster.setAttribute("src", filmsInStorage.poster);
+      filmPoster.setAttribute("src", item.poster);
       anchor.appendChild(filmPoster);
 
       const filmTitle = document.createElement("p");
       filmTitle.className = "cart-film-title";
-      filmTitle.innerText = filmsInStorage.title;
+      filmTitle.innerText = item.title;
       film.appendChild(filmTitle);
 
       const filmPrice = document.createElement("p");
       filmPrice.className = "cart-film-price";
-      filmPrice.innerText = filmsInStorage.price + " NOK";
+      filmPrice.innerText = item.price + " NOK";
       film.appendChild(filmPrice);
 
       const removeButton = document.createElement("button");
       removeButton.innerText = "Remove";
       film.appendChild(removeButton);
 
-      removeButton.addEventListener("click", removeFilm);
-
-      // remove item from storage
-      function removeFilm() {
-        localStorage.removeItem(localStorage.key(i));
-        location.reload();
-      }
-
       const cartDividingLine = document.createElement("hr");
       document.querySelector("#cart").appendChild(cartDividingLine);
-    }
+
+      removeButton.addEventListener("click", removeFilm);
+
+      // remove item from cart and storage
+      function removeFilm() {
+        film.remove();
+        cartDividingLine.remove();
+
+        let updatedCart = JSON.parse(localStorage.getItem("cart"));
+        updatedCart = updatedCart.filter((cart) => cart.title != item.title);
+        localStorage.setItem("cart", JSON.stringify(updatedCart));
+
+        document.querySelector("#add-to-cart").innerText = "Add to cart";
+        document.querySelector("#item-count").innerText = JSON.parse(
+          localStorage.getItem("cart")
+        ).length;
+      }
+    });
   } catch (error) {
     const cartError = document.createElement("p");
     cartError.innerText = "Something went wrong, couldn't get cart items.";
@@ -195,4 +205,6 @@ form.addEventListener("submit", (e) => {
   }
 });
 
-document.querySelector("#item-count").innerText = localStorage.length;
+document.querySelector("#item-count").innerText = JSON.parse(
+  localStorage.getItem("cart")
+).length;

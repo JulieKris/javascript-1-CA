@@ -88,10 +88,12 @@ function renderFilmInfo() {
 
 //changes the text on add to cart button when clicked to remove
 function buttonText() {
-  if (localStorage.getItem(id) === null) {
+  if (
+    JSON.parse(localStorage.getItem("cart")).some((e) => e.title === title) ===
+    false
+  ) {
     document.querySelector("#add-to-cart").innerText = "Add to cart";
-  }
-  if (localStorage.getItem(id) !== null) {
+  } else {
     document.querySelector("#add-to-cart").innerText = "Remove from cart";
   }
 }
@@ -106,16 +108,28 @@ function addToCart() {
   };
 
   if (document.querySelector("#add-to-cart").innerText === "Add to cart") {
-    localStorage.setItem(id, JSON.stringify(store));
+    let updatedCart = JSON.parse(localStorage.getItem("cart"));
+    updatedCart.push(store);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
     document.querySelector("#add-to-cart").innerText = "Remove from cart";
-    document.querySelector("#item-count").innerText = localStorage.length;
+    document.querySelector("#item-count").innerText = JSON.parse(
+      localStorage.getItem("cart")
+    ).length;
   } else {
-    localStorage.removeItem(id);
+    // remove film from storage
+    let updatedCart = JSON.parse(localStorage.getItem("cart"));
+    updatedCart = updatedCart.filter((cart) => cart.title != title);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+
     document.querySelector("#add-to-cart").innerText = "Add to cart";
-    document.querySelector("#item-count").innerText = localStorage.length;
+    document.querySelector("#item-count").innerText = JSON.parse(
+      localStorage.getItem("cart")
+    ).length;
   }
 }
 
 fetchFilm();
 
-document.querySelector("#item-count").innerText = localStorage.length;
+document.querySelector("#item-count").innerText = JSON.parse(
+  localStorage.getItem("cart")
+).length;

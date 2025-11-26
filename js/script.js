@@ -4,6 +4,10 @@ let allFilms = [];
 let unfilteredFilmGenres = [];
 let filmGenres = [];
 
+if (localStorage.getItem("cart") == null) {
+  localStorage.setItem("cart", "[]");
+}
+
 async function fetchFilms() {
   loading.show();
   try {
@@ -96,4 +100,6 @@ function filterFilmsByGenre() {
 
 fetchFilms();
 
-document.querySelector("#item-count").innerText = localStorage.length;
+document.querySelector("#item-count").innerText = JSON.parse(
+  localStorage.getItem("cart")
+).length;
