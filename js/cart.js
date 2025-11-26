@@ -98,7 +98,6 @@ function renderCartItems() {
         updatedCart = updatedCart.filter((cart) => cart.title != item.title);
         localStorage.setItem("cart", JSON.stringify(updatedCart));
 
-        document.querySelector("#add-to-cart").innerText = "Add to cart";
         document.querySelector("#item-count").innerText = JSON.parse(
           localStorage.getItem("cart")
         ).length;
